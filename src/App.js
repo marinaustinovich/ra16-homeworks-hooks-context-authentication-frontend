@@ -1,17 +1,16 @@
-import { Fragment } from 'react';
-import './App.css';
-import AuthProvider from './components/AuthProvider/AuthProvider';
-import LandingPage from './components/LandingPage/LandingPage';
-import ToolbarFunctional from './components/ToolbarFunctional/ToolbarFunctional';
+import { Fragment } from "react";
+import "./App.css";
+import { AuthProvider, ToolbarFunctional } from "./components";
+
 
 function App() {
   return (
     <div className="App">
       <AuthProvider>
         <Fragment>
-          <ToolbarFunctional></ToolbarFunctional>
+          <ToolbarFunctional />
         </Fragment>
-      </AuthProvider> 
+      </AuthProvider>
     </div>
   );
 }
