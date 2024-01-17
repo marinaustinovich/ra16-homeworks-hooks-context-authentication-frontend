@@ -12,7 +12,7 @@ function Error({ error }: Props) {
 
   useEffect(() => {
     setLoginError(error);
-  }, []);
+  }, [error]);
 
   if (!isVisible) {
     return null;

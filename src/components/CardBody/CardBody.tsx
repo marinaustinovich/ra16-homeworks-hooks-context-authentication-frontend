@@ -1,5 +1,3 @@
-import React from "react";
-import PropTypes from "prop-types";
 import "./CardBody.css";
 import { ImageDataType } from "../Card/Card";
 

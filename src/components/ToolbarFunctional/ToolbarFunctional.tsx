@@ -7,7 +7,7 @@ import LandingPage from "../LandingPage/LandingPage";
 
 export  const ToolbarFunctional = () => {
     const {token} =   useContext(AuthContext);
-    console.log(token)
+
     return (
         <Fragment>
         {token && <Fragment>
