@@ -10,7 +10,8 @@ type AuthContextType = {
   profile: Profile | null;
   error: ErrorType | null;
   handleLogout: () => void;
-  handleLogin: (login: string, password: string) => void;
+  handleLogin: (login: string, password: string) => Promise<{ success: boolean }> | undefined; 
+
 };
 
 const AuthContext = React.createContext<AuthContextType>({
@@ -18,7 +19,9 @@ const AuthContext = React.createContext<AuthContextType>({
   profile: null,
   error: null,
   handleLogout: () => {},
-  handleLogin: () => {},
+  handleLogin: async (login: string, password: string) => {
+    return { success: false };
+  },
 });
 
 export default AuthContext;

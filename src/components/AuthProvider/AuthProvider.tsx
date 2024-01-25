@@ -9,11 +9,18 @@ type Props = {
 
 export const AuthProvider = (props: Props) => {
   const [token, setToken] = useStorage<string>(localStorage, "token");
-  const [profile, setProfile] = useStorage<Profile | null>(localStorage, "profile", true);
+  const [profile, setProfile] = useStorage<Profile | null>(
+    localStorage,
+    "profile",
+    true
+  );
 
   const [error, setError] = useState(null);
 
-  const handleLogin = async (login: string, password: string) => {
+  const handleLogin = async (
+    login: string,
+    password: string
+  ): Promise<{ success: boolean }> => {
     try {
       const response = await fetch(`${process.env.REACT_APP_AUTH_URL}`, {
         method: "POST",
@@ -32,10 +39,13 @@ export const AuthProvider = (props: Props) => {
       const { token } = await response.json();
       setToken(token);
       setError(null);
+      return { success: true };
     } catch (e) {
       console.error(e);
+      return { success: false };
     }
   };
+
   const handleLogout = () => {
     setToken(null);
     setProfile(null);

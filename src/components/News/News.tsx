@@ -2,10 +2,19 @@ import { useContext, useEffect, useState } from "react";
 
 import AuthContext from "../../contexts/AuthContext";
 import { Card } from "../Card";
+import { useNavigate } from "react-router-dom";
 
 export const News = () => {
   const { token } = useContext(AuthContext);
   const [news, setNews] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/");
+    }
+    
+  }, [token, navigate]);
 
   useEffect(() => {
     const fetchProfile = async () => {

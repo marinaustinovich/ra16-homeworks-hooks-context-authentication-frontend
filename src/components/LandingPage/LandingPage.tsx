@@ -3,6 +3,7 @@ import { ChangeEvent, FormEvent, useContext, useState } from "react";
 import "./LandingPage.css";
 import AuthContext from "../../contexts/AuthContext";
 import Error from "../Error/Error";
+import { useNavigate } from "react-router-dom";
 
 function LandingPage() {
   const [form, setForm] = useState({
@@ -12,6 +13,7 @@ function LandingPage() {
 
   const [error, setError] = useState<string | null>(null);
   const { handleLogin, error: authError } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -19,8 +21,12 @@ function LandingPage() {
 
     if (login && password) {
       try {
-        await handleLogin(login, password);
-        setForm({ login: "", password: "" });
+        const result = await handleLogin(login, password);
+        
+        if (result?.success) {
+          setForm({ login: "", password: "" });
+          navigate('/news')
+        }
       } catch (e) {
         console.log("error", e);
       }
@@ -70,7 +76,5 @@ function LandingPage() {
     </div>
   );
 }
-
-LandingPage.propTypes = {};
 
 export default LandingPage;
